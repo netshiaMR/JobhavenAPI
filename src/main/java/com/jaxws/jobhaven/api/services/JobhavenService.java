@@ -2,8 +2,11 @@ package com.jaxws.jobhaven.api.services;
 
 import com.jaxws.jobhaven.api.exception.UpdateException;
 import com.jaxws.jobhaven.api.views.Account;
+import com.jaxws.jobhaven.api.views.Address;
+import com.jaxws.jobhaven.api.views.Job;
 import com.jaxws.jobhaven.api.views.Profile;
 import com.jaxws.jobhaven.api.views.UserSession;
+import java.util.List;
 import javax.ejb.CreateException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -35,5 +38,15 @@ public interface JobhavenService {
 
     @WebMethod(operationName = "updateUsername")
     public String updateUsername(String username, String SecurityQuestion) throws UpdateException;
-
+    
+    @WebMethod(operationName = "findJob")
+    public List<Object> findJob(String jobTilte, Address address);
+    
+    @WebMethod(operationName = "findCV")
+    public List<Object> findCV(Job jobRequest, Address address);
+    
+    @WebMethod(operationName = "applyOfJob")
+    public String applyOfJob(String jobId, Address address);
+    
+    
 }

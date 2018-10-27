@@ -2,8 +2,11 @@ package com.jaxws.jobhaven.api.services;
 
 import com.jaxws.jobhaven.api.exception.UpdateException;
 import com.jaxws.jobhaven.api.views.Account;
+import com.jaxws.jobhaven.api.views.Address;
+import com.jaxws.jobhaven.api.views.Job;
 import com.jaxws.jobhaven.api.views.Profile;
 import com.jaxws.jobhaven.api.views.UserSession;
+import java.util.List;
 import javax.ejb.CreateException;
 import javax.jws.WebService;
 import javax.jws.WebParam;
@@ -50,6 +53,21 @@ public class JobhavenServicesImpl  implements JobhavenService{
 
     @Override
     public String updateUsername(String username, String SecurityQuestion) throws UpdateException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Object> findJob(String jobTilte, Address address) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Object> findCV(Job jobRequest, Address address) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String applyOfJob(String jobId, Address address) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
