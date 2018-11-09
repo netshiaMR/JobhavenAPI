@@ -1,76 +1,52 @@
--- ****************** Jobhaven Database entity Create sql ******************;
--- ***************************************************;
+-- ****************************************************************************************************;
+-- ******************** Jobhaven Database Creation Scription: MySQL ***********************************;
+-- ****************************************************************************************************;
+-- ******************************** `Users` ***********************************************************;
+-- ******************************** `jobhavendb`.`Users`************************************************
 
-
--- ************************************** `Users`
-
-CREATE TABLE `Users`
+CREATE TABLE `jobhavendb`.`Users`
 (
- `userId`     int NOT NULL ,
+ `userId`     int NOT NULL AUTO_INCREMENT,
  `username`   varchar(30) NOT NULL ,
  `password`   varchar(150) NOT NULL ,
  `accountRef` varchar(20) NOT NULL ,
 PRIMARY KEY (`userId`)
 );
+-- ************************************** `jobhavendb`.`skills` **************************************
 
-
-
-
-
-
--- ************************************** `skills`
-
-CREATE TABLE `skills`
+CREATE TABLE `jobhavendb`.`skills`
 (
- `skillId`    int NOT NULL ,
+ `skillId`    int NOT NULL AUTO_INCREMENT,
  `skillName`  varchar(45) ,
  `skillLevel` varchar(45) ,
  `skillType`  varchar(45) ,
  `period`     int ,
 PRIMARY KEY (`skillId`)
 );
+-- ************************************** `jobhavendb`.`JobType` **************************************
 
-
-
-
-
-
--- ************************************** `JobType`
-
-CREATE TABLE `JobType`
+CREATE TABLE `jobhavendb`.`JobType`
 (
- `jobTypeId`     int NOT NULL ,
+ `jobTypeId`     int NOT NULL AUTO_INCREMENT,
  `jobTypeRef`    varchar(20) NOT NULL ,
  `jobTypeName`   varchar(45) NOT NULL ,
  `jobTypePeriod` int NOT NULL ,
 PRIMARY KEY (`jobTypeId`)
 );
+-- ************************************** `jobhavendb`.`Industries` **************************************
 
-
-
-
-
-
--- ************************************** `Industries`
-
-CREATE TABLE `Industries`
+CREATE TABLE `jobhavendb`.`Industries`
 (
- `IId`          int NOT NULL ,
+ `IId`          int NOT NULL AUTO_INCREMENT,
  `IndustryName` varchar(45) ,
  `industryRef`  varchar(45) ,
 PRIMARY KEY (`IId`)
 );
+-- ************************************** `jobhavendb`.`Experinces` **************************************
 
-
-
-
-
-
--- ************************************** `Experinces`
-
-CREATE TABLE `Experinces`
+CREATE TABLE `jobhavendb`.`Experinces`
 (
- `xpId`             int NOT NULL ,
+ `xpId`            int NOT NULL AUTO_INCREMENT,
  `xpRef`            varchar(20) ,
  `cvRef`            varchar(20) ,
  `xpJobTitle`       varchar(20) ,
@@ -79,17 +55,11 @@ CREATE TABLE `Experinces`
  `period`           varchar(10) ,
 PRIMARY KEY (`xpId`)
 );
+-- ************************************** `jobhavendb`.`Education` **************************************
 
-
-
-
-
-
--- ************************************** `Education`
-
-CREATE TABLE `Education`
+CREATE TABLE `jobhavendb`.`Education`
 (
- `educationId`        int NOT NULL ,
+ `educationId`        int NOT NULL AUTO_INCREMENT,
  `cvRef`              varchar(20) ,
  `attrName`           varchar(45) ,
  `attrValues`         varchar(45) ,
@@ -102,34 +72,22 @@ CREATE TABLE `Education`
  `endDate`            date ,
 PRIMARY KEY (`educationId`)
 );
+-- ************************************** `jobhavendb`.`Applied` **************************************
 
-
-
-
-
-
--- ************************************** `Applied`
-
-CREATE TABLE `Applied`
+CREATE TABLE `jobhavendb`.`Applied`
 (
- `appliedId`  int NOT NULL ,
+ `appliedId`  int NOT NULL AUTO_INCREMENT,
  `accountRef` varchar(45) NOT NULL ,
  `firstname`  varchar(45) NOT NULL ,
  `LastName`   varchar(45) NOT NULL ,
  `savedJobs`  varchar(45) NOT NULL ,
 PRIMARY KEY (`appliedId`)
 );
+-- ************************************** `jobhavendb`.`Actions` **************************************
 
-
-
-
-
-
--- ************************************** `Actions`
-
-CREATE TABLE `Actions`
+CREATE TABLE `jobhavendb`.`Actions`
 (
- `actionId`          int NOT NULL ,
+ `actionId`          int NOT NULL AUTO_INCREMENT,
  `actionRef`         varchar(20) NOT NULL ,
  `accountref`        varchar(20) ,
  `actionDescription` varchar(150) ,
@@ -141,32 +99,20 @@ CREATE TABLE `Actions`
  `attrValue`         varchar(45) ,
 PRIMARY KEY (`actionId`)
 );
+-- ************************************** `jobhavendb`.`AccountType` **************************************
 
-
-
-
-
-
--- ************************************** `AccountType`
-
-CREATE TABLE `AccountType`
+CREATE TABLE `jobhavendb`.`AccountType`
 (
  `accountTypeId` int NOT NULL ,
  `typeRef`       varchar(20) NOT NULL ,
  `typeName`      varchar(25) NOT NULL ,
 PRIMARY KEY (`accountTypeId`)
 );
+-- ************************************** `jobhavendb`.`Date` **************************************
 
-
-
-
-
-
--- ************************************** `Date`
-
-CREATE TABLE `Date`
+CREATE TABLE `jobhavendb`.`Date`
 (
- `dateId`       int NOT NULL ,
+ `dateId`       int NOT NULL AUTO_INCREMENT,
  `attrName`     varchar(45) ,
  `createDate`   datetime ,
  `startDate`    date ,
@@ -180,21 +126,15 @@ CREATE TABLE `Date`
  `activePeriod` int ,
 PRIMARY KEY (`dateId`),
 KEY `fkIdx_120` (`educationId`),
-CONSTRAINT `FK_120` FOREIGN KEY `fkIdx_120` (`educationId`) REFERENCES `Education` (`educationId`),
+CONSTRAINT `FK_120` FOREIGN KEY `fkIdx_120` (`educationId`) REFERENCES `jobhavendb`.`Education` (`educationId`),
 KEY `fkIdx_123` (`xpId`),
-CONSTRAINT `FK_123` FOREIGN KEY `fkIdx_123` (`xpId`) REFERENCES `Experinces` (`xpId`)
+CONSTRAINT `FK_123` FOREIGN KEY `fkIdx_123` (`xpId`) REFERENCES `jobhavendb`.`Experinces` (`xpId`)
 );
+-- ************************************** `jobhavendb`.`CVs` **************************************
 
-
-
-
-
-
--- ************************************** `CVs`
-
-CREATE TABLE `CVs`
+CREATE TABLE `jobhavendb`.`CVs`
 (
- `cvId`           int NOT NULL ,
+ `cvId`          int NOT NULL AUTO_INCREMENT,
  `cvReference`    varchar(20) NOT NULL ,
  `accountRef`     varchar(20) ,
  `firstname`      varchar(30) NOT NULL ,
@@ -209,23 +149,17 @@ CREATE TABLE `CVs`
  `xpId`           int ,
 PRIMARY KEY (`cvId`),
 KEY `fkIdx_68` (`skillId`),
-CONSTRAINT `FK_68` FOREIGN KEY `fkIdx_68` (`skillId`) REFERENCES `skills` (`skillId`),
+CONSTRAINT `FK_68` FOREIGN KEY `fkIdx_68` (`skillId`) REFERENCES `jobhavendb`.`skills` (`skillId`),
 KEY `fkIdx_74` (`educationId`),
-CONSTRAINT `FK_74` FOREIGN KEY `fkIdx_74` (`educationId`) REFERENCES `Education` (`educationId`),
+CONSTRAINT `FK_74` FOREIGN KEY `fkIdx_74` (`educationId`) REFERENCES `jobhavendb`.`Education` (`educationId`),
 KEY `fkIdx_92` (`xpId`),
-CONSTRAINT `FK_92` FOREIGN KEY `fkIdx_92` (`xpId`) REFERENCES `Experinces` (`xpId`)
+CONSTRAINT `FK_92` FOREIGN KEY `fkIdx_92` (`xpId`) REFERENCES `jobhavendb`.`Experinces` (`xpId`)
 );
+-- ************************************** `jobhavendb`.`Jobs` **************************************
 
-
-
-
-
-
--- ************************************** `Jobs`
-
-CREATE TABLE `Jobs`
+CREATE TABLE `jobhavendb`.`Jobs`
 (
- `jobID`      int NOT NULL ,
+ `jobID`      int NOT NULL AUTO_INCREMENT,
  `jobTitle`   varchar(100) ,
  `jobDetails` varchar(900) ,
  `jobPeriod`  varchar(20) ,
@@ -233,21 +167,16 @@ CREATE TABLE `Jobs`
  `dateId`     int NOT NULL ,
 PRIMARY KEY (`jobID`),
 KEY `fkIdx_186` (`jobTypeId`),
-CONSTRAINT `FK_186` FOREIGN KEY `fkIdx_186` (`jobTypeId`) REFERENCES `JobType` (`jobTypeId`),
+CONSTRAINT `FK_186` FOREIGN KEY `fkIdx_186` (`jobTypeId`) REFERENCES `jobhavendb`.`JobType` (`jobTypeId`),
 KEY `fkIdx_200` (`dateId`),
-CONSTRAINT `FK_200` FOREIGN KEY `fkIdx_200` (`dateId`) REFERENCES `Date` (`dateId`)
+CONSTRAINT `FK_200` FOREIGN KEY `fkIdx_200` (`dateId`) REFERENCES `jobhavendb`.`Date` (`dateId`)
 );
 
+-- ************************************** `jobhavendb`.`ActiveJobs` **************************************
 
-
-
-
-
--- ************************************** `ActiveJobs`
-
-CREATE TABLE `ActiveJobs`
+CREATE TABLE `jobhavendb`.`ActiveJobs`
 (
- `activeJobsId` int NOT NULL ,
+ `activeJobsId` int NOT NULL AUTO_INCREMENT,
  `activeRef`    varchar(20) NOT NULL ,
  `jobRef`       varchar(20) NOT NULL ,
  `isActive`     varchar(10) NOT NULL ,
@@ -256,19 +185,13 @@ CREATE TABLE `ActiveJobs`
  `dateId`       int NOT NULL ,
 PRIMARY KEY (`activeJobsId`),
 KEY `fkIdx_205` (`dateId`),
-CONSTRAINT `FK_205` FOREIGN KEY `fkIdx_205` (`dateId`) REFERENCES `Date` (`dateId`)
+CONSTRAINT `FK_205` FOREIGN KEY `fkIdx_205` (`dateId`) REFERENCES `jobhavendb`.`Date` (`dateId`)
 );
+-- ************************************** `jobhavendb`.`Accounts` **************************************
 
-
-
-
-
-
--- ************************************** `Accounts`
-
-CREATE TABLE `Accounts`
+CREATE TABLE `jobhavendb`.`Accounts`
 (
- `accountId`     int NOT NULL ,
+ `accountId`     int NOT NULL AUTO_INCREMENT,
  `accountRef`    varchar(20) NOT NULL ,
  `accountcvRef`  varchar(20) NOT NULL ,
  `isActivated`   varchar(10) NOT NULL ,
@@ -277,44 +200,32 @@ CREATE TABLE `Accounts`
  `cvId`          int NOT NULL ,
 PRIMARY KEY (`accountId`),
 KEY `fkIdx_24` (`accountTypeId`),
-CONSTRAINT `FK_24` FOREIGN KEY `fkIdx_24` (`accountTypeId`) REFERENCES `AccountType` (`accountTypeId`),
+CONSTRAINT `FK_24` FOREIGN KEY `fkIdx_24` (`accountTypeId`) REFERENCES `jobhavendb`.`AccountType` (`accountTypeId`),
 KEY `fkIdx_33` (`userId_1`),
-CONSTRAINT `FK_33` FOREIGN KEY `fkIdx_33` (`userId_1`) REFERENCES `Users` (`userId`),
+CONSTRAINT `FK_33` FOREIGN KEY `fkIdx_33` (`userId_1`) REFERENCES `jobhavendb`.`Users` (`userId`),
 KEY `fkIdx_62` (`cvId`),
-CONSTRAINT `FK_62` FOREIGN KEY `fkIdx_62` (`cvId`) REFERENCES `CVs` (`cvId`)
+CONSTRAINT `FK_62` FOREIGN KEY `fkIdx_62` (`cvId`) REFERENCES `jobhavendb`.`CVs` (`cvId`)
 );
+-- ************************************** `jobhavendb`.`SavedJobs` **************************************
 
-
-
-
-
-
--- ************************************** `SavedJobs`
-
-CREATE TABLE `SavedJobs`
+CREATE TABLE `jobhavendb`.`SavedJobs`
 (
- `savedJobId`  int NOT NULL ,
+ `savedJobId`  int NOT NULL AUTO_INCREMENT,
  `savedJobRef` varchar(20) ,
  `accountRef`  varchar(20) ,
  `jobID`       int NOT NULL ,
  `appliedId`   int NOT NULL ,
 PRIMARY KEY (`savedJobId`),
 KEY `fkIdx_174` (`jobID`),
-CONSTRAINT `FK_174` FOREIGN KEY `fkIdx_174` (`jobID`) REFERENCES `Jobs` (`jobID`),
+CONSTRAINT `FK_174` FOREIGN KEY `fkIdx_174` (`jobID`) REFERENCES `jobhavendb`.`Jobs` (`jobID`),
 KEY `fkIdx_177` (`appliedId`),
-CONSTRAINT `FK_177` FOREIGN KEY `fkIdx_177` (`appliedId`) REFERENCES `Applied` (`appliedId`)
+CONSTRAINT `FK_177` FOREIGN KEY `fkIdx_177` (`appliedId`) REFERENCES `jobhavendb`.`Applied` (`appliedId`)
 );
+-- ************************************** `jobhavendb`.`Address` **************************************
 
-
-
-
-
-
--- ************************************** `Address`
-
-CREATE TABLE `Address`
+CREATE TABLE `jobhavendb`.`Address`
 (
- `addressId`  int NOT NULL ,
+ `addressId` int NOT NULL AUTO_INCREMENT,
  `accountRef` varchar(20) NOT NULL ,
  `cvRef`      varchar(20) NOT NULL ,
  `xpRef`      varchar(20) NOT NULL ,
@@ -327,47 +238,35 @@ CREATE TABLE `Address`
  `jobID`      int NOT NULL ,
 PRIMARY KEY (`addressId`),
 KEY `fkIdx_126` (`cvId`),
-CONSTRAINT `FK_126` FOREIGN KEY `fkIdx_126` (`cvId`) REFERENCES `CVs` (`cvId`),
+CONSTRAINT `FK_126` FOREIGN KEY `fkIdx_126` (`cvId`) REFERENCES `jobhavendb`.`CVs` (`cvId`),
 KEY `fkIdx_189` (`jobID`),
-CONSTRAINT `FK_189` FOREIGN KEY `fkIdx_189` (`jobID`) REFERENCES `Jobs` (`jobID`)
+CONSTRAINT `FK_189` FOREIGN KEY `fkIdx_189` (`jobID`) REFERENCES `jobhavendb`.`Jobs` (`jobID`)
 );
+-- ************************************** `jobhavendb`.`AccountImages`**************************************
 
-
-
-
-
-
--- ************************************** `AccountImages`
-
-CREATE TABLE `AccountImages`
+CREATE TABLE `jobhavendb`.`AccountImages`
 (
- `accountImagesId` int NOT NULL ,
+ `accountImagesId` int NOT NULL AUTO_INCREMENT,
  `accountId`       int ,
  `photos`          binary ,
 PRIMARY KEY (`accountImagesId`),
 KEY `fkIdx_39` (`accountId`),
-CONSTRAINT `FK_39` FOREIGN KEY `fkIdx_39` (`accountId`) REFERENCES `Accounts` (`accountId`)
+CONSTRAINT `FK_39` FOREIGN KEY `fkIdx_39` (`accountId`) REFERENCES `jobhavendb`.`Accounts` (`accountId`)
 );
+-- ************************************** `jobhavendb`.`Companies` **************************************
 
-
-
-
-
-
--- ************************************** `Companies`
-
-CREATE TABLE `Companies`
+CREATE TABLE `jobhavendb`.`Companies`
 (
- `companyId`       int NOT NULL ,
+ `companyId`       int NOT NULL AUTO_INCREMENT,
  `companyRef`      varchar(20) ,
  `companyName`     varchar(30) ,
  `accountImagesId` int NOT NULL ,
  `IId`             int NOT NULL ,
 PRIMARY KEY (`companyId`),
 KEY `fkIdx_153` (`IId`),
-CONSTRAINT `FK_153` FOREIGN KEY `fkIdx_153` (`IId`) REFERENCES `Industries` (`IId`),
+CONSTRAINT `FK_153` FOREIGN KEY `fkIdx_153` (`IId`) REFERENCES `jobhavendb`.`Industries` (`IId`),
 KEY `fkIdx_48` (`accountImagesId`),
-CONSTRAINT `FK_48` FOREIGN KEY `fkIdx_48` (`accountImagesId`) REFERENCES `AccountImages` (`accountImagesId`)
+CONSTRAINT `FK_48` FOREIGN KEY `fkIdx_48` (`accountImagesId`) REFERENCES `jobhavendb`.`AccountImages` (`accountImagesId`)
 );
 
 
