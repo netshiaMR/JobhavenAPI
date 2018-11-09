@@ -4,6 +4,8 @@
 -- ******************************** `Users` ***********************************************************;
 -- ******************************** `jobhavendb`.`Users`************************************************
 
+CREATE SCHEMA `jobhavendb`;
+
 CREATE TABLE `jobhavendb`.`Users`
 (
  `userId`     int NOT NULL AUTO_INCREMENT,
