@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jaxws.jobhaven.api.views;
+package com.jaxws.jobhaven.api.bind.request;
 
 /**
  *
  * @author NetshiaR2
  */
-public class Account {
+public class CreateProfileRequest {
     
 }

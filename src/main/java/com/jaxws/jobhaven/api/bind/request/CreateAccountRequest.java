@@ -1,13 +1,19 @@
-package com.jaxws.jobhaven.api.views;
-
-import java.io.Serializable;
-
+package com.jaxws.jobhaven.api.bind.request;
 /**
  * @author NetshiaR2
  */
-public class UserSession implements Serializable{
+public class CreateAccountRequest {
+    private String firstname;
     private String username;
     private String password;
+    
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
 
     public String getUsername() {
         return username;

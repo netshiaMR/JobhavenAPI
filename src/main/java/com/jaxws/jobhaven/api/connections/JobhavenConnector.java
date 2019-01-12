@@ -1,4 +1,4 @@
-package com.jaxws.jobhaven.api.model.connections;
+package com.jaxws.jobhaven.api.connections;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 @Stateless
 public class JobhavenConnector {
 
-    DataSource jobhavenDBSource;
+    private DataSource jobhavenDBSource;
 
     @PostConstruct
     public void init() {
